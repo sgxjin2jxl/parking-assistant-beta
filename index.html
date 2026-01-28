@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="停车省钱小助手 - 帮你记住停车时间，及时提醒，避免超时多付费">
+  <meta name="theme-color" content="#10B981">
+  
+  <!-- PWA配置 -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="images/icon-192.png">
+  <link rel="apple-touch-icon" href="images/icon-192.png">
+  
+  <!-- 样式 -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <title>🚗 停车省钱小助手</title>
+</head>
+<body>
+  <!-- ==================== 主容器 ==================== -->
+  <div class="container">
+    
+    <!-- ==================== 头部 ==================== -->
+    <header>
+      <h1>🚗 停车省钱小助手</h1>
+      <p>帮你记住时间，避免超时多付费</p>
+    </header>
+
+    <!-- ==================== 主内容区 ==================== -->
+    <main>
+      
+      <!-- ==================== 空闲界面 ==================== -->
+      <div id="idle-view">
+        
+        <!-- 选择停车场 -->
+        <div class="section">
+          <div class="section-title">📍 选择停车场</div>
+          <select id="parking-lot-selector">
+            <option value="">-- 请选择停车场 --</option>
+            <!-- 选项会由JavaScript动态填充 -->
+          </select>
+        </div>
+
+        <!-- 开始停车按钮 -->
+        <div class="section">
+          <button id="start-parking-btn" class="btn-primary">
+            ▶️ 开始停车
+          </button>
+        </div>
+
+        <!-- 提示信息 -->
+        <div class="hint">
+          <strong>💡 使用提示：</strong>
+          选择停车场后点击"开始停车"，APP会自动计算费用并在关键时刻提醒你。
+        </div>
+
+      </div>
+
+      <!-- ==================== 停车中界面 ==================== -->
+      <div id="parking-view">
+        
+        <!-- 停车信息卡片 -->
+        <div class="info-card">
+          <h2>当前停车场</h2>
+          <div id="current-parking-lot" class="location">金融硅谷</div>
+          
+          <div class="info-row">
+            <span class="info-label">已停时长</span>
+            <span id="elapsed-time" class="info-value">0分钟</span>
+          </div>
+          
+          <div class="info-row">
+            <span class="info-label">当前费用</span>
+            <span id="current-fee" class="info-value large">0 元</span>
+          </div>
+          
+          <div class="info-row">
+            <span class="info-label">当前状态</span>
+            <span id="current-status" class="status-badge free">免费时段</span>
+          </div>
+          
+          <div class="info-row">
+            <span class="info-label">下次提醒</span>
+            <span id="next-reminder" class="info-value">计算中...</span>
+          </div>
+        </div>
+
+        <!-- 二维码显示区域 -->
+        <div id="qr-code-container">
+          <h3>💳 停车场二维码</h3>
+          <img id="qr-code-display" src="" alt="停车场二维码">
+          <p class="qr-hint">长按二维码识别，跳转微信/支付宝支付</p>
+        </div>
+
+        <!-- 操作按钮组 -->
+        <div class="button-group">
+          
+          <!-- 调整开始时间 -->
+          <button id="adjust-time-btn" class="btn-outline">
+            🕐 调整开始时间
+          </button>
+
+          <!-- 拍摄二维码 -->
+          <button id="capture-qr-btn" class="btn-outline">
+            📷 拍摄/更新二维码
+          </button>
+
+          <!-- 设置提醒 -->
+          <button id="set-reminder-btn" class="btn-secondary">
+            ⏰ 设置提醒
+          </button>
+
+          <!-- 我要走了 -->
+          <button id="finish-parking-btn" class="btn-primary">
+            🚶 我要走了
+          </button>
+
+          <!-- 我已支付 -->
+          <button id="paid-btn" class="btn-danger">
+            ✅ 我已支付
+          </button>
+
+        </div>
+
+        <!-- 提示信息 -->
+        <div class="hint">
+          <strong>💡 提示：</strong>
+          点击"设置提醒"会自动跳转到iOS快捷指令设置提醒。快到下一个计费时段前10分钟会通知你。
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ==================== 页脚 ==================== -->
+  <footer>
+    Made with 💚 by Catherine & Claude
+  </footer>
+
+  <!-- ==================== 弹窗 ==================== -->
+  <div id="modal-overlay" class="modal-overlay" style="display: none;">
+    <div class="modal">
+      <h3 id="modal-title">调整时间</h3>
+      <div class="modal-content">
+        <input type="time" id="modal-time-input" class="modal-input">
+      </div>
+      <div class="modal-buttons">
+        <button id="modal-cancel-btn" class="btn-outline">取消</button>
+        <button id="modal-confirm-btn" class="btn-primary">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JavaScript文件 ==================== -->
+  <script src="js/parkingLots.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/notifications.js"></script>
+
+  <!-- ==================== Service Worker注册（PWA支持） ==================== -->
+  <script>
+    // 注册Service Worker（离线支持）
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(registration => {
+            console.log('Service Worker注册成功:', registration);
+          })
+          .catch(error => {
+            console.log('Service Worker注册失败:', error);
+          });
+      });
+    }
+  </script>
+
+</body>
+</html>

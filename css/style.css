@@ -1,0 +1,475 @@
+/* ======================================================
+   停车省钱小助手 - 样式文件
+   ====================================================== 
+   设计理念：
+   - 主色调：绿色（省钱、环保）+ 蓝色（科技、可靠）
+   - 风格：现代、简洁、易用
+   - 适配：移动端优先（手机屏幕）
+   ====================================================== */
+
+/* ==================== 全局样式 ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", 
+               "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(135deg, #10B981 0%, #3B82F6 100%);
+  min-height: 100vh;
+  padding: 20px;
+  color: #1F2937;
+}
+
+/* ==================== 容器 ==================== */
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+/* ==================== 头部 ==================== */
+header {
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+header p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ==================== 主内容区 ==================== */
+main {
+  padding: 30px 20px;
+}
+
+/* ==================== 空闲界面 ==================== */
+#idle-view {
+  display: block;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ==================== 下拉选择框 ==================== */
+select {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  background: white;
+  color: #1F2937;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%236B7280' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+select:focus {
+  outline: none;
+  border-color: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+select option {
+  padding: 10px;
+}
+
+/* ==================== 按钮样式 ==================== */
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* 主按钮（绿色） */
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: white;
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+/* 次要按钮（蓝色） */
+.btn-secondary {
+  width: 100%;
+  background: linear-gradient(135deg, #3B82F6, #2563EB);
+  color: white;
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+  margin-bottom: 12px;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(59, 130, 246, 0.4);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* 辅助按钮（灰色边框） */
+.btn-outline {
+  width: 100%;
+  background: white;
+  color: #6B7280;
+  border: 2px solid #E5E7EB;
+  box-shadow: none;
+  margin-bottom: 12px;
+}
+
+.btn-outline:hover {
+  background: #F9FAFB;
+  border-color: #D1D5DB;
+}
+
+/* 危险按钮（红色） */
+.btn-danger {
+  width: 100%;
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  color: white;
+  box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(239, 68, 68, 0.4);
+}
+
+/* ==================== 停车中界面 ==================== */
+#parking-view {
+  display: none;
+}
+
+.info-card {
+  background: linear-gradient(135deg, #F0FDF4, #DBEAFE);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 2px solid #10B981;
+}
+
+.info-card h2 {
+  font-size: 14px;
+  color: #059669;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-card .location {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1F2937;
+  margin-bottom: 20px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 14px;
+  color: #6B7280;
+}
+
+.info-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1F2937;
+}
+
+.info-value.large {
+  font-size: 32px;
+  color: #10B981;
+}
+
+/* 状态徽章 */
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.free {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.status-badge.charging {
+  background: #DBEAFE;
+  color: #1E40AF;
+}
+
+.status-badge.capped {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+/* ==================== 二维码容器 ==================== */
+#qr-code-container {
+  display: none;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 2px solid #E5E7EB;
+  text-align: center;
+}
+
+#qr-code-container h3 {
+  font-size: 16px;
+  color: #374151;
+  margin-bottom: 12px;
+}
+
+#qr-code-display {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.qr-hint {
+  font-size: 14px;
+  color: #6B7280;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+/* ==================== 按钮组 ==================== */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ==================== 提示信息 ==================== */
+.hint {
+  background: #FEF3C7;
+  border-left: 4px solid #F59E0B;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #92400E;
+  line-height: 1.5;
+}
+
+.hint strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ==================== 页脚 ==================== */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: white;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+footer a {
+  color: white;
+  text-decoration: underline;
+}
+
+/* ==================== 弹窗样式 ==================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  background: white;
+  padding: 24px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal h3 {
+  margin-bottom: 16px;
+  font-size: 18px;
+  color: #1F2937;
+}
+
+.modal-content {
+  margin-bottom: 24px;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+/* ==================== 加载动画 ==================== */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    border-radius: 16px;
+  }
+
+  header h1 {
+    font-size: 24px;
+  }
+
+  main {
+    padding: 20px 16px;
+  }
+
+  button {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+}
+
+/* ==================== PWA 适配 ==================== */
+@media (display-mode: standalone) {
+  /* 当作为PWA运行时，增加顶部padding（避免刘海屏遮挡） */
+  body {
+    padding-top: max(20px, env(safe-area-inset-top));
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+  }
+}
+
+/* ==================== 打印样式 ==================== */
+@media print {
+  body {
+    background: white;
+  }
+
+  .container {
+    box-shadow: none;
+  }
+
+  button {
+    display: none;
+  }
+}
+
+/* ==================== 深色模式支持（未来可选） ==================== */
+/* 
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(135deg, #064E3B 0%, #1E3A8A 100%);
+  }
+  
+  .container {
+    background: #1F2937;
+    color: #F9FAFB;
+  }
+  
+  ... 更多深色模式样式
+}
+*/
