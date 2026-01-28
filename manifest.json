@@ -2,7 +2,7 @@
   "name": "停车省钱小助手",
   "short_name": "停车助手",
   "description": "帮你记住停车时间，及时提醒，避免超时多付费",
-  "start_url": "/",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#10B981",
   "theme_color": "#10B981",
