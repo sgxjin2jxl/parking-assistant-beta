@@ -388,11 +388,13 @@ function updateParkingInfo() {
 
   // 格式化时长
   const hours = Math.floor(elapsedMinutes / 60);
-  const minutes = elapsedMinutes % 60;
-  const timeString = `${hours}小时${minutes}分钟`;
+  const minutes = Math.floor(elapsedMinutes % 60);
+  
+  // 使用 CSS 动画实现冒号跳动效果
+  const timeString = `${hours.toString().padStart(2, '0')}<span class="blinking-colon">:</span>${minutes.toString().padStart(2, '0')}`;
+  document.getElementById('elapsed-time').innerHTML = timeString;
 
   // 更新显示
-  document.getElementById('elapsed-time').textContent = timeString;
   document.getElementById('current-fee').textContent = `${currentFee} 元`;
 
   // 显示当前时段状态
