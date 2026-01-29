@@ -181,6 +181,9 @@ function bindEventListeners() {
   // 我已支付按钮
   document.getElementById('paid-btn').addEventListener('click', onPaid);
 
+  // 🆕 查看收费规则
+  document.getElementById('show-rules-btn').addEventListener('click', toggleRulesDisplay);
+
   // 弹窗取消按钮
   document.getElementById('modal-cancel-btn').addEventListener('click', () => {
     document.getElementById('modal-overlay').style.display = 'none';
@@ -390,11 +393,9 @@ function updateParkingInfo() {
   const hours = Math.floor(elapsedMinutes / 60);
   const minutes = Math.floor(elapsedMinutes % 60);
   
-  // 使用 CSS 动画实现冒号跳动效果
+  // 更新显示，且时间部分使用 CSS 动画实现冒号跳动效果
   const timeString = `${hours.toString().padStart(2, '0')}<span class="blinking-colon">:</span>${minutes.toString().padStart(2, '0')}`;
   document.getElementById('elapsed-time').innerHTML = timeString;
-
-  // 更新显示
   document.getElementById('current-fee').textContent = `${currentFee} 元`;
 
   // 显示当前时段状态
@@ -436,6 +437,62 @@ function getCurrentPeriodStatus(parkingLot, minutes) {
   }
 
   return '计费中';
+}
+
+// ======================================================
+// 查看收费规则逻辑
+// ======================================================
+
+/**
+ * 切换收费规则的显示/隐藏
+ */
+function toggleRulesDisplay() {
+  const rulesDiv = document.getElementById('rules-display');
+  const btn = document.getElementById('show-rules-btn');
+  
+  if (rulesDiv.style.display === 'none') {
+    // 获取当前停车场信息
+    const parkingLot = getParkingLotById(AppState.selectedParkingLotId);
+    if (!parkingLot) return;
+
+    // 生成并插入 HTML
+    const rulesHTML = generateRulesHTML(parkingLot);
+    document.getElementById('rules-content').innerHTML = rulesHTML;
+    
+    // 显示容器
+    rulesDiv.style.display = 'block';
+    btn.textContent = '🔼 收起规则';
+  } else {
+    // 隐藏容器
+    rulesDiv.style.display = 'none';
+    btn.textContent = '📋 查看收费规则';
+  }
+}
+
+/**
+ * 根据停车场数据生成收费规则的 HTML 列表
+ */
+function generateRulesHTML(parkingLot) {
+  let html = '<div style="font-size: 14px; line-height: 1.8;">';
+  
+  parkingLot.rules.forEach((rule, index) => {
+    if (rule.type === 'free') {
+      html += `<p>✅ 前${rule.duration}分钟：<strong>免费</strong></p>`;
+    } else if (rule.type === 'flat') {
+      html += `<p>💰 接下来${rule.duration}分钟：<strong>${rule.price}元（固定）</strong></p>`;
+    } else if (rule.type === 'hourly') {
+      // 兼容阪急这种30分钟计费但标记为hourly的情况
+      const unit = rule.duration === 60 ? '小时' : `${rule.duration}分钟`;
+      html += `<p>💰 之后：<strong>${rule.price}元/${unit}</strong></p>`;
+    }
+  });
+  
+  if (parkingLot.maxPrice) {
+    html += `<p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #E5E7EB;">🎯 封顶价格：<strong style="color: var(--primary-color);">${parkingLot.maxPrice}元</strong></p>`;
+  }
+  
+  html += '</div>';
+  return html;
 }
 
 // ======================================================

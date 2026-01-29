@@ -17,7 +17,9 @@ const FILES_TO_CACHE = [
   '/js/parkingLots.js',
   '/js/app.js',
   '/js/notifications.js',
-  '/manifest.json'
+  '/manifest.json',
+  './images/icon-192.png',
+  './images/icon-512.png'
 ];
 
 // ==================== 安装事件 ====================
